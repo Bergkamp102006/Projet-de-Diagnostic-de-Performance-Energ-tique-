@@ -19,5 +19,5 @@ Données Globales : Charge et nettoie les données à partir d'un fichier CSV po
 2. Installation de l'application sur votre poste
 1- Ouvrir Rshiny
 2-install.packages(c("shiny", "httr", "jsonlite", "shinydashboard", "dplyr", "leaflet", "DT", "tidygeocoder", "ggplot2", "geosphere", "maps"))
-3 - Télécharger le code
-
+3 - Télécharger le code et tous les fichiers nécessaires
+4-Exécuter le code
