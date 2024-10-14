@@ -27,7 +27,7 @@ for (i in cp) {
   # Récupération initiale (2021-2024)
   params <- list(
     
-    select = "Coût_chauffage,Coût_éclairage,Coût_auxiliaires,Coordonnée_cartographique_Y_(BAN),Coordonnée_cartographique_X_(BAN),Date_réception_DPE,Coût_total_5_usages,Coût_ECS,Coût_refroidissement,N°DPE,Code_postal_(BAN),Etiquette_DPE,Surface_habitable_logement,Identifiant__BAN,Statut_géocodage,N°_département_(BAN)",
+    select = elect = "N°DPE,Date_établissement_DPE,Date_visite_diagnostiqueur,Modèle_DPE,Code_postal_(BAN),Nom_commune(BAN),Etiquette_DPE,Version_DPE,Date_réception_DPE,Coût_total_5_usages,Coût_chauffage,Coût_éclairage,Coût_ECS,Méthode_application_DPE,Coût_refroidissement,Coût_auxiliaires,Coordonnée_cartographique_X_(BAN),Coordonnée_cartographique_Y_(BAN),Type_bâtiment",
     page = 1,
     size = 10000, # Augmenté pour récupérer plus de données
     q = i,
