@@ -12,16 +12,20 @@ Les données traitées dans cette application shiny sont filtrées sur les codes
 
 2- Documentation fonctionnelle 
 Les pages du menu :
-  2.1.Page Documentation
+  2.1.Page Documentation:
+    
     Présente un aperçu descriptif des données utilisées dans l'application.
   
-  2.2.Page Tableau de Données
+  2.2.Page Tableau de Données:
+   
     Un tableau interactif (DataTable) affiche une description des principales variables présentes dans le fichier DPE
   
-  2.3.Page Statistiques
+  2.3.Page Statistiques:
+   
     Offre une vue d'ensemble des statistiques importantes liées aux DPE, y compris la répartition des étiquettes DPE, des coûts de chauffage, ainsi qu'un résumé statistique
   
-  2.4.Page Carte
+  2.4.Page Carte:
+    
     Permet de géocoder un code postal saisi par l'utilisateur et d'afficher le résultat sur une carte interactive.
 
 3- Vidéo explicative de l'installation de l'application en local
