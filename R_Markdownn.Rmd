@@ -1,0 +1,54 @@
+---
+title: "DPE_Markdown_Muriel_Mesmin"
+author: "Muriel"
+date: "2024-10-14"
+output: 
+  pdf_document:
+  latex_engine: xelatex
+  fontsize: 9pt
+  classoption: twocolumn
+  geometry: margin=0.8in
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+Introduction
+
+Face au changement climatique et à la hausse des prix de l'énergie, **GreenTech Solutions** a été mandatée par **Enedis** pour évaluer l'impact de la classe de Diagnostic de Performance Énergétique (DPE) sur les consommations électriques des logements. Ce projet analyse la corrélation entre les classes DPE, allant de A (très performant) à G (très peu performant), et la consommation d'énergie, afin de formuler des recommandations pour améliorer l'efficacité énergétique en France.
+```{r Logements_Neufs_Anciens,echo=FALSE}
+# Importer les jeux de données
+df_existants = read.csv(file = "C:/Users/murie/OneDrive/Documents/dpe-v2-logements-existants.csv",header=  TRUE,dec = ".",sep = ",")
+df_neufs = read.csv(file = "C:/Users/murie/OneDrive/Documents/dpe-v2-logements-neufs.csv",header=  TRUE,dec = ".",sep = ",")
+# Créer une colonne nommée Logement dans les deux datasets
+df_neufs$Logement = "Neuf"
+df_existants$Logement = "Ancien"
+# Fusionner les deux dataframes
+colonnes_communes = intersect(colnames(df_neufs),colnames(df_existants))
+df = rbind(df_neufs[ ,colonnes_communes], df_existants[ ,colonnes_communes])
+# Vérifications
+dim(df)
+table(df$Logement)
+```
+
+Deux jeux de données sur les diagnostics de performance énergétique (DPE) ont été importés : un pour les logements neufs (2 851 observations) et un pour les logements existants (16 069 observations). Après ajout d'une colonne pour identifier l'origine des données et fusion des deux ensembles en conservant 195 colonnes communes, le dataframe final contient 18 920 lignes, dont 85 % de logements anciens, révélant un déséquilibre significatif entre les deux types de logements.
+```{r répartition des logements,echo=FALSE}
+barplot(table(df$Logement), main = "Répartition par type de Logement (Neuf ou Ancien)",xlab = "Type de Logement",ylab = "Nombre de logements",col = "red")
+```
+
+L'histogramme montre que plus de 15 000 logements sont anciens, tandis que seulement environ 2 000 sont neufs, soulignant la prédominance des logements anciens dans l'ensemble des données. Cette disparité suggère des défis en matière d'efficacité énergétique et souligne la nécessité d'initiatives de rénovation pour améliorer la performance énergétique des bâtiments existants.
+```{r Corrélation entre deux variables,echo=FALSE}
+# Corrélation entre surface habitable et coût de chauffage
+correlation <- cor(df$Surface_habitable_logement, df$Coût_chauffage, use = "complete.obs")
+print(correlation)
+# Graphique de dispersion
+plot(df$Surface_habitable_logement, df$Coût_chauffage,main = "Corrélation entre la Surface Habitable et le Coût du Chauffage",xlab = "Surface Habitable (m²)",ylab = "Coût du Chauffage (€)",col = "blue", pch = 19)
+# Ligne de tendance
+abline(lm(df$Coût_chauffage ~ df$Surface_habitable_logement), col = "red", lwd = 2)
+
+```
+La corrélation de **0,5487** entre la surface habitable et le coût du chauffage indique qu'une plus grande surface habitable est généralement liée à des coûts de chauffage plus élevés. Cependant, cette relation ne prouve pas un lien de cause à effet, d'autres facteurs comme l'efficacité des systèmes de chauffage doivent également être pris en compte. Une analyse plus approfondie serait nécessaire pour mieux comprendre ces déterminants.
+
+
+Conclusion
+
+Ce projet a évalué l'impact de la classe DPE sur les consommations électriques des logements, révélant que les logements mieux classés (A et B) ont des coûts énergétiques inférieurs. Les disparités régionales suggèrent que des facteurs locaux influencent ces coûts. Les résultats soulignent la nécessité d'améliorer l'efficacité énergétique pour réduire les dépenses des ménages et l'empreinte carbone, tout en orientant les décisions politiques vers la sobriété énergétique.
